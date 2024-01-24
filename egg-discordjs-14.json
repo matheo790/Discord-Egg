@@ -1,0 +1,42 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2023-03-07T19:24:36+01:00",
+    "name": "Bot NodeJS18",
+    "author": "contact@chaun14.fr",
+    "description": "Bot NodeJS 18",
+    "features": null,
+    "docker_images": {
+        "chaun14\/discord-js14": "chaun14\/discord-js14"
+    },
+    "file_denylist": [],
+    "startup": "node ${STARTUP_FILE}",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"\"\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\nrm -rf \/mnt\/server\r\nmkdir -p \/mnt\/server\/\r\nchown -R root:root \/mnt\r\ncd \/mnt\/server\/\r\n\r\n# set timezone\r\ntimezone=Europe\/Paris\r\nln -snf \/usr\/share\/zoneinfo\/$timezone \/etc\/localtime && echo $timezone > \/etc\/timezone\r\ndpkg-reconfigure tzdata\r\n\r\n# make sure everything is fine\r\napt -y update\r\napt -y upgrade\r\napt install -y wget unzip\r\n\r\n# placeholder\r\nwget https:\/\/dev.chaun14.fr\/nodejsdefault.zip\r\nunzip nodejsdefault\r\nrm -rf nodejsdefault.zip",
+            "container": "ubuntu:20.04",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Startup File",
+            "description": "Select a file to start your bot from!",
+            "env_variable": "STARTUP_FILE",
+            "default_value": "index.js",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:200",
+            "field_type": "text"
+        }
+    ]
+}
